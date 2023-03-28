@@ -19,6 +19,10 @@ public abstract class Modelo {
 	private IAlquileres alquileres;
 	private IVehiculos vehiculos;
 	private IFuenteDatos fuenteDatos;
+	
+	protected Modelo(FactoriaFuenteDatos factoriaFuenteDatos) {
+		setFuenteDatos(factoriaFuenteDatos.crear());
+	}
 
 	protected IClientes getClientes() {
 		return clientes;
