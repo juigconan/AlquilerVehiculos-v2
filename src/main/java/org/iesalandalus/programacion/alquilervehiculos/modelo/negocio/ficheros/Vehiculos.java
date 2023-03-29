@@ -9,11 +9,32 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IVehiculos;
 
 public class Vehiculos implements IVehiculos {
-
+	
+	private static Vehiculos instancia;
 	private List<Vehiculo> coleccionVehiculos;
 
-	public Vehiculos() {
+	private Vehiculos() {
 		coleccionVehiculos = new ArrayList<>();
+	}
+	
+	static Vehiculos getInstancia() {
+		if(instancia == null) {
+			instancia = new Vehiculos();
+		}
+		return instancia;
+	
+	}
+
+	@Override
+	public void comenzar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void terminar() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

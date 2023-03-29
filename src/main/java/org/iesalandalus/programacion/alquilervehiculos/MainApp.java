@@ -11,7 +11,7 @@ public class MainApp {
 
 	public static void main(String[] args) {
 		Vista vista = FactoriaVista.TEXTO.crear();
-		Modelo modelo = new ModeloCascada(FactoriaFuenteDatos.MEMORIA.crear());
+		Modelo modelo = new ModeloCascada(FactoriaFuenteDatos.FICHEROS);
 		Controlador controlador = new Controlador(modelo, vista);
 		controlador.comenzar();
 	}

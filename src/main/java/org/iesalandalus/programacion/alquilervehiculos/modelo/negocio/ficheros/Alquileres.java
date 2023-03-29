@@ -13,11 +13,31 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IAlquileres;
 
 public class Alquileres implements IAlquileres {
-
+	
+	private static Alquileres instancia;
 	private List<Alquiler> coleccionAlquileres;
 
 	public Alquileres() {
 		coleccionAlquileres = new ArrayList<>();
+	}
+
+	static Alquileres getInstancia() {
+		if(instancia == null) {
+			instancia = new Alquileres();
+		}
+		return instancia;
+	}
+
+	@Override
+	public void comenzar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void terminar() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
