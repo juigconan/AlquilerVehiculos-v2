@@ -32,8 +32,8 @@ public class VistaTexto extends Vista {
 
 	@Override
 	public void terminar() {
+		getControlador().terminar();
 		System.out.print("¡Gracias por utilizar nuestra aplicacion!");
-
 	}
 
 	public void insertarCliente() {

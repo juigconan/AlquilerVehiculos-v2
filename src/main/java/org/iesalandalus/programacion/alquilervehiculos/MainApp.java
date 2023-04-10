@@ -14,6 +14,7 @@ public class MainApp {
 		Modelo modelo = new ModeloCascada(FactoriaFuenteDatos.FICHEROS);
 		Controlador controlador = new Controlador(modelo, vista);
 		controlador.comenzar();
+		
 	}
 
 }

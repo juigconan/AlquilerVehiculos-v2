@@ -22,6 +22,9 @@ public abstract class Modelo {
 	
 	protected Modelo(FactoriaFuenteDatos factoriaFuenteDatos) {
 		setFuenteDatos(factoriaFuenteDatos.crear());
+		clientes = fuenteDatos.crearClientes();
+		alquileres = fuenteDatos.crearAlquileres();
+		vehiculos = fuenteDatos.crearVehiculos();
 	}
 
 	protected IClientes getClientes() {
@@ -41,13 +44,15 @@ public abstract class Modelo {
 	}
 
 	public void comenzar() {
-		clientes = fuenteDatos.crearClientes();
-		alquileres = fuenteDatos.crearAlquileres();
-		vehiculos = fuenteDatos.crearVehiculos();
+		clientes.comenzar();
+		vehiculos.comenzar();
+		alquileres.comenzar();
 	}
 
 	public void terminar() {
-		System.out.println("El modelo ha terminado.");
+		clientes.terminar();
+		vehiculos.terminar();
+		alquileres.terminar();
 	}
 
 	public abstract void insertar(Cliente cliente) throws OperationNotSupportedException;

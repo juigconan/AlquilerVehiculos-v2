@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
+import javax.xml.parsers.DocumentBuilder;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.IClientes;
@@ -14,8 +15,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Clientes implements IClientes {
-	
-	private static final File FICHERO_CLIENTES = new File(String.format("datos%sclientes.xml",File.separator));
+
+	private static final File FICHERO_CLIENTES = new File(String.format("datos%sclientes.xml", File.separator));
 	private static final String RAIZ = "clientes";
 	private static final String CLIENTE = "cliente";
 	private static final String NOMBRE = "nombre";
@@ -27,42 +28,71 @@ public class Clientes implements IClientes {
 	private Clientes() {
 		coleccionClientes = new ArrayList<>();
 	}
-	
-	static Clientes getInstancia(){
-		if(instancia == null) {
+
+	static Clientes getInstancia() {
+		if (instancia == null) {
 			instancia = new Clientes();
 		}
 		return instancia;
 	}
 
 	@Override
-	public void comenzar() {	
-		leerDom(UtilidadesXml.leerXmlDeFichero(FICHERO_CLIENTES));
+	public void comenzar() {
+		Document documento = UtilidadesXml.leerXmlDeFichero(FICHERO_CLIENTES);
+		if(documento != null) {
+			leerDom(documento);
+			System.out.println("Documento leido correctamente.");
+		}else {
+			System.out.println("ERROR: El documento no es correcto");
+		}
 	}
-	
+
 	private void leerDom(Document documentoXml) {
-		
+
 		NodeList clientes = documentoXml.getElementsByTagName(CLIENTE);
-		
-		for(int i = 0; i < clientes.getLength(); i++) {
+
+		for (int i = 0; i < clientes.getLength(); i++) {
 			Node cliente = clientes.item(i);
-			if(cliente.getNodeType() == Node.ELEMENT_NODE) {
-				String nombre = ((Element)cliente).getAttribute(NOMBRE);
-				String dni = ((Element)cliente).getAttribute(DNI);
-				String telefono= ((Element)cliente).getAttribute(TELEFONO);
+			if (cliente.getNodeType() == Node.ELEMENT_NODE) {
 				try {
-					insertar(new Cliente(nombre, dni, telefono));
-				} catch (OperationNotSupportedException e) {
-					System.out.printf("%s%s%d",e.getMessage(),"Fallo en la posicion ",i);
+					insertar(getCliente((Element) cliente));
+				} catch (OperationNotSupportedException | IllegalArgumentException | NullPointerException e) {
+					System.out.printf("%s%s%d", e.getMessage(), " Fallo en la posicion: ", i);
 				}
 			}
 		}
-		
+
+	}
+
+	private Cliente getCliente(Element elemento) {
+		return new Cliente(elemento.getAttribute(NOMBRE), elemento.getAttribute(DNI), elemento.getAttribute(TELEFONO));
 	}
 
 	@Override
 	public void terminar() {
-		
+		UtilidadesXml.escribirXmlAFichero(crearDom(), FICHERO_CLIENTES);
+	}
+
+	private Document crearDom() {
+		DocumentBuilder constructor = UtilidadesXml.crearConstructorDocumentoXml();
+		Document documentoXml = null;
+		if (constructor != null) {
+			documentoXml = constructor.newDocument();
+			documentoXml.appendChild(documentoXml.createElement(RAIZ));
+			for (Cliente cliente : coleccionClientes) {
+				Element elementoCliente = crearElemento(documentoXml, cliente);
+				documentoXml.getDocumentElement().appendChild(elementoCliente);
+			}
+		}
+		return documentoXml;
+	}
+
+	private static Element crearElemento(Document documentoXML, Cliente cliente) {
+		Element elementoCliente = documentoXML.createElement(CLIENTE);
+		elementoCliente.setAttribute(NOMBRE, cliente.getNombre());
+		elementoCliente.setAttribute(DNI, cliente.getDni());
+		elementoCliente.setAttribute(TELEFONO, cliente.getTelefono());
+		return elementoCliente;
 	}
 
 	@Override
