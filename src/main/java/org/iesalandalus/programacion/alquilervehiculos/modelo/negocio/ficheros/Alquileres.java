@@ -48,9 +48,9 @@ public class Alquileres implements IAlquileres {
 		Document documento = UtilidadesXml.leerXmlDeFichero(FICHERO_ALQUILERES);
 		if(documento != null) {
 			leerDom(documento);
-			System.out.println("Documento leido correctamente.");
+			System.out.println("Documento de alquileres leido correctamente.");
 		}else {
-			System.out.println("ERROR: El documento no es correcto");
+			System.out.println("ERROR: El documento de alquileres no es correcto");
 		}
 	}
 

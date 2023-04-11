@@ -8,7 +8,6 @@ import javax.naming.OperationNotSupportedException;
 import javax.xml.parsers.DocumentBuilder;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Autobus;
-import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Furgoneta;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
@@ -53,9 +52,9 @@ public class Vehiculos implements IVehiculos {
 		Document documento = UtilidadesXml.leerXmlDeFichero(FICHERO_VEHICULOS);
 		if(documento != null) {
 			leerDom(documento);
-			System.out.println("Documento leido correctamente.");
+			System.out.println("Documento de vehículos leido correctamente.");
 		}else {
-			System.out.println("ERROR: El documento no es correcto");
+			System.out.println("ERROR: El documento de vehículos no es correcto");
 		}
 	}
 
@@ -90,7 +89,7 @@ public class Vehiculos implements IVehiculos {
 		} else if (tipo.equals(AUTOBUS)) {
 			vehiculo = new Autobus(marca, modelo, Integer.parseInt(elemento.getAttribute(PLAZAS)), matricula);
 		} else {
-			throw new IllegalArgumentException("ERROR: El tipo del vehículo no es válido.");
+			throw new IllegalArgumentException("ERROR: El tipo del vehículo en el documento no es válido.");
 		}
 		return vehiculo;
 	}

@@ -41,9 +41,9 @@ public class Clientes implements IClientes {
 		Document documento = UtilidadesXml.leerXmlDeFichero(FICHERO_CLIENTES);
 		if(documento != null) {
 			leerDom(documento);
-			System.out.println("Documento leido correctamente.");
+			System.out.println("Documento de clientes leído correctamente.");
 		}else {
-			System.out.println("ERROR: El documento no es correcto");
+			System.out.println("ERROR: El documento de clientes no es correcto");
 		}
 	}
 
@@ -80,14 +80,14 @@ public class Clientes implements IClientes {
 			documentoXml = constructor.newDocument();
 			documentoXml.appendChild(documentoXml.createElement(RAIZ));
 			for (Cliente cliente : coleccionClientes) {
-				Element elementoCliente = crearElemento(documentoXml, cliente);
+				Element elementoCliente = getElemento(documentoXml, cliente);
 				documentoXml.getDocumentElement().appendChild(elementoCliente);
 			}
 		}
 		return documentoXml;
 	}
 
-	private static Element crearElemento(Document documentoXML, Cliente cliente) {
+	private static Element getElemento(Document documentoXML, Cliente cliente) {
 		Element elementoCliente = documentoXML.createElement(CLIENTE);
 		elementoCliente.setAttribute(NOMBRE, cliente.getNombre());
 		elementoCliente.setAttribute(DNI, cliente.getDni());
