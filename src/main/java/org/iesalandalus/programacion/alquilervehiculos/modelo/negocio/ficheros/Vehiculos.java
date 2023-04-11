@@ -106,14 +106,14 @@ public class Vehiculos implements IVehiculos {
 			documentoXml = constructor.newDocument();
 			documentoXml.appendChild(documentoXml.createElement(RAIZ));
 			for (Vehiculo vehiculo : coleccionVehiculos) {
-				Element elementoVehiclo = crearElemento(documentoXml, vehiculo);
+				Element elementoVehiclo = getElemento(documentoXml, vehiculo);
 				documentoXml.getDocumentElement().appendChild(elementoVehiclo);
 			}
 		}
 		return documentoXml;
 	}
 
-	private static Element crearElemento(Document documentoXML, Vehiculo vehiculo) {
+	private static Element getElemento(Document documentoXML, Vehiculo vehiculo) {
 		Element elementoVehiculo = documentoXML.createElement(VEHICULO);
 		elementoVehiculo.setAttribute(MARCA, vehiculo.getMarca());
 		elementoVehiculo.setAttribute(MODELO, vehiculo.getModelo());

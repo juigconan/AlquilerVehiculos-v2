@@ -109,14 +109,14 @@ public class Alquileres implements IAlquileres {
 			documentoXml = constructor.newDocument();
 			documentoXml.appendChild(documentoXml.createElement(RAIZ));
 			for (Alquiler alquiler : coleccionAlquileres) {
-				Element elementoCliente = crearElemento(documentoXml, alquiler);
+				Element elementoCliente = getElemento(documentoXml, alquiler);
 				documentoXml.getDocumentElement().appendChild(elementoCliente);
 			}
 		}
 		return documentoXml;
 	}
 
-	private static Element crearElemento(Document documentoXML, Alquiler alquiler) {
+	private static Element getElemento(Document documentoXML, Alquiler alquiler) {
 		Element elementoAlquiler = documentoXML.createElement(ALQUILER);
 		elementoAlquiler.setAttribute(CLIENTE, alquiler.getCliente().getDni());
 		elementoAlquiler.setAttribute(VEHICULO, alquiler.getVehiculo().getMatricula());
