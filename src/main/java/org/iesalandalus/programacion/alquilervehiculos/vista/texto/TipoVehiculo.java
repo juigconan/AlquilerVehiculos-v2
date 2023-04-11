@@ -29,17 +29,17 @@ public enum TipoVehiculo {
 		if (vehiculo == null) {
 			throw new NullPointerException("ERROR: El vehiculo no puede ser nulo.");
 		}
-		int ordinal = -1;
+		TipoVehiculo tipo = null;
 		if (vehiculo instanceof Turismo) {
-			ordinal = TipoVehiculo.TURISMO.ordinal();
+			tipo = TipoVehiculo.TURISMO;
 		}
 		if (vehiculo instanceof Autobus) {
-			ordinal = TipoVehiculo.AUTOBUS.ordinal();
+			tipo = TipoVehiculo.AUTOBUS;
 		}
 		if (vehiculo instanceof Furgoneta) {
-			ordinal = TipoVehiculo.FURGONETA.ordinal();
+			tipo = TipoVehiculo.FURGONETA;
 		}
-		return get(ordinal);
+		return tipo;
 	}
 
 	@Override

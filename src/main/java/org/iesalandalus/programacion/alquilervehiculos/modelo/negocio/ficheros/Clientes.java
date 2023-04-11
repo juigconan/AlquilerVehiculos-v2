@@ -39,10 +39,10 @@ public class Clientes implements IClientes {
 	@Override
 	public void comenzar() {
 		Document documento = UtilidadesXml.leerXmlDeFichero(FICHERO_CLIENTES);
-		if(documento != null) {
+		if (documento != null) {
 			leerDom(documento);
 			System.out.println("Documento de clientes leído correctamente.");
-		}else {
+		} else {
 			System.out.println("ERROR: El documento de clientes no es correcto");
 		}
 	}
@@ -136,14 +136,15 @@ public class Clientes implements IClientes {
 		if (cliente == null) {
 			throw new NullPointerException("ERROR: No se puede modificar un cliente nulo.");
 		}
-		if (!coleccionClientes.contains(cliente)) {
+		Cliente clienteEncontrado = buscar(cliente);
+		if (clienteEncontrado == null) {
 			throw new OperationNotSupportedException("ERROR: No existe ningún cliente con ese DNI.");
 		}
 		if (nombre != null && !nombre.isBlank()) {
-			cliente.setNombre(nombre);
+			clienteEncontrado.setNombre(nombre);
 		}
 		if (telefono != null && !telefono.isBlank()) {
-			cliente.setTelefono(telefono);
+			clienteEncontrado.setTelefono(telefono);
 		}
 	}
 

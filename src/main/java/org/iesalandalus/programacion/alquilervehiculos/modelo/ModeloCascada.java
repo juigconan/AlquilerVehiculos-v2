@@ -23,7 +23,7 @@ public class ModeloCascada extends Modelo {
 
 	@Override
 	public void insertar(Vehiculo vehiculo) throws OperationNotSupportedException {
-		getVehiculos().insertar(vehiculo);
+		getVehiculos().insertar(Vehiculo.copiar(vehiculo));
 
 	}
 

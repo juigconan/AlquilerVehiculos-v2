@@ -29,11 +29,9 @@ public abstract class Vehiculo {
 		Vehiculo vehiculoADevolver = null;
 		if (vehiculo instanceof Turismo turismo) {
 			vehiculoADevolver = new Turismo(turismo);
-		}
-		if (vehiculo instanceof Furgoneta furgoneta) {
+		} else if (vehiculo instanceof Furgoneta furgoneta) {
 			vehiculoADevolver = new Furgoneta(furgoneta);
-		}
-		if (vehiculo instanceof Autobus autobus) {
+		} else if (vehiculo instanceof Autobus autobus) {
 			vehiculoADevolver = new Autobus(autobus);
 		}
 		return vehiculoADevolver;

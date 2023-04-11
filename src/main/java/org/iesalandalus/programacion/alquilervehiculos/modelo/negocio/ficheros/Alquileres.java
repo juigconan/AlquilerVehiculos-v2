@@ -191,7 +191,7 @@ public class Alquileres implements IAlquileres {
 			throw new OperationNotSupportedException("ERROR: No existe ningún alquiler abierto para ese cliente.");
 		}
 
-		buscar(alquiler).devolver(fechaDevolucion);
+		alquiler.devolver(fechaDevolucion);
 	}
 
 	private Alquiler getAlquilerAbierto(Cliente cliente) {
@@ -215,7 +215,7 @@ public class Alquileres implements IAlquileres {
 		if (alquiler == null) {
 			throw new OperationNotSupportedException("ERROR: No existe ningún alquiler abierto para ese vehículo.");
 		}
-		buscar(alquiler).devolver(fechaDevolucion);
+		alquiler.devolver(fechaDevolucion);
 	}
 
 	private Alquiler getAlquilerAbierto(Vehiculo vehiculo) {
